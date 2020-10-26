@@ -1,0 +1,49 @@
+﻿@model List<SelectListItem>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Select an album</h1>
+    @Html.DropDownList("album--dropdown", Model, new { @id = "album--dropdown" })
+</div>
+
+<div id="photo--container"></div>
+<div id="post--container"></div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        function getComments(postId) {
+            $.ajax({
+                url: "/home/comments/" + postId
+            }).done(function (partialview) {
+                $("#post--container").html(partialview);
+
+            }).fail(function (err) {
+                alert(err);
+            });
+        }
+
+        $(document).ready(function () {
+            $("#album--dropdown").change(function () {
+
+                $("photo--container").empty();
+                $("post--container").empty();
+                var albumId = $('#album--dropdown').val();
+
+                $.ajax({
+                    url: "/home/photos/" + albumId,
+                }).done(function (partialview) {
+                    $("#photo--container").html(partialview);
+                }).fail(function (xhr, err) {
+                    alert(err);
+                });
+            });
+        });
+
+    </script>
+}
+

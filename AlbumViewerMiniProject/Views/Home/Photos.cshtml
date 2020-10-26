@@ -1,0 +1,24 @@
+﻿@model List<AlbumViewerMiniProject.Models.Photo>
+
+<div class="text-center">
+    <h4>Photos</h4>
+    <table style="width:100%">
+        <tr>
+            <th>Title</th>
+            <th>Photo</th>
+            <th>Options</th>
+        </tr>
+        @foreach (Photo photo in Model)
+        {
+            <tr>
+                <td>@photo.Title</td>
+                <td>
+                    <img src="@photo.ThumbnailUrl" alt="@photo.Title"/>
+                </td>
+                <td>
+                    <a href="#post--container" onclick="getComments('@photo.AlbumId')">Get Comments</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

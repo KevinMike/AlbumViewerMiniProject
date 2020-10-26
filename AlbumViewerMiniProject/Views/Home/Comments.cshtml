@@ -1,0 +1,18 @@
+﻿@model List<AlbumViewerMiniProject.Models.Comment>
+
+<div class="text-center">
+    <h4>Comments</h4>
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Content</th>
+        </tr>
+        @foreach (Comment comment in Model)
+        {
+            <tr>
+                <td>@comment.Name</td>
+                <td>@comment.Body</td>
+            </tr>
+        }
+    </table>
+</div>
