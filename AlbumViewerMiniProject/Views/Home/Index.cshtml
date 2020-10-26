@@ -5,7 +5,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Select an album</h1>
-    @Html.DropDownList("album--dropdown", Model, new { @id = "album--dropdown" })
+    @Html.DropDownList("album--dropdown", Model, new { @id = "album--dropdown" })   
+    <button onclick="searchAlbum()">Search ...</button>
 </div>
 
 <div id="photo--container"></div>
@@ -27,10 +28,8 @@
             });
         }
 
-        $(document).ready(function () {
-            $("#album--dropdown").change(function () {
-
-                $("photo--container").empty();
+        function searchAlbum() {
+            $("photo--container").empty();
                 $("post--container").empty();
                 var albumId = $('#album--dropdown').val();
 
@@ -40,9 +39,8 @@
                     $("#photo--container").html(partialview);
                 }).fail(function (xhr, err) {
                     alert(err);
-                });
             });
-        });
+        }
 
     </script>
 }

@@ -17,10 +17,10 @@ namespace AlbumViewerMiniProject.Infraestructure
         private readonly HttpClient _client;
         private readonly string _baseUrl;
 
-        public RestProvider(string urlBase)
+        public RestProvider(string baseUrl)
         {
             _client = new HttpClient();
-            _baseUrl = urlBase;
+            _baseUrl = baseUrl;
         }
 
         public async Task<T> AsyncSendRequest<T>() where T : new()
@@ -36,11 +36,9 @@ namespace AlbumViewerMiniProject.Infraestructure
 
         private void HandleOtherResponses(HttpResponseMessage response)
         {
-            //_logger.Debug($"Status Code ={response.StatusCode}");
-
             if (response.StatusCode == HttpStatusCode.OK) return;
             if (response.StatusCode == HttpStatusCode.NoContent) throw new DataException();
-           // if (response.StatusCode == HttpStatusCode.NotFound) throw new NoData();
+            if (response.StatusCode == HttpStatusCode.NotFound) throw new DataException();
             if (response.StatusCode == HttpStatusCode.InternalServerError) throw new ApplicationException();
             if (response.StatusCode == HttpStatusCode.Forbidden || response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -49,9 +47,6 @@ namespace AlbumViewerMiniProject.Infraestructure
 
             throw new Exception("Not Controlled Exception");
         }
-
-
-
 
     }
 }

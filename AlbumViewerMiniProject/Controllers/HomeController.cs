@@ -28,7 +28,8 @@ namespace AlbumViewerMiniProject.Controllers
         public async Task<IActionResult> Index()
         {
             var albums = await _albumClient.GetAlbums();
-            var retVal  = albums.Select(p => new SelectListItem { Text = p.Title, Value = p.Id.ToString() })
+            var retVal  = albums
+                            .Select(p => new SelectListItem { Text = p.Title, Value = p.Id.ToString() })
                             .ToList();
             return View(retVal);
         }
